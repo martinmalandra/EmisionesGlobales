@@ -157,11 +157,11 @@ co2_df <- co2_df %>%
 co2_2020 <- co2_df %>% 
   select(Pais,
          Serie,
-         Año_2020)
+         Año_2020) #datos del año 2020.
 
 # Seleccion de variables
 
-## C02 (kt)
+## Emisiones totales de C02 en kt
 
 co2_emissions_2020 <- co2_2020 %>% 
   filter(Serie == "CO2 emissions (kt)")
@@ -180,3 +180,26 @@ co2_gaseous_2020 <- co2_2020 %>%
 
 co2_liquid_2020 <- co2_2020 %>% 
   filter(Serie == "CO2 emissions from liquid fuel consumption (kt)")
+
+## Emisiones de metano (CH4) en equivalente de CO2
+
+ch4_eq_co2_2020 <- co2_2020 %>% 
+  filter(Serie == "Methane emissions (kt of CO2 equivalent)")
+
+## Emisiones de óxido nitroso (NO2) en equivalente de CO2
+
+no2_eq_co2_2020 <- co2_2020 %>% 
+  filter(Serie == "Nitrous oxide emissions (thousand metric tons of CO2 equivalent)")
+
+
+## Comprobación de NAs en los datasets creados
+
+which(is.na(no2_eq_co2_2020$Año_2020))
+which(is.na(ch4_eq_co2_2020$Año_2020))
+which(is.na(co2_emissions_2020$Año_2020))
+
+## Reescribimos para hallar los países que no registran los datos solicitados
+
+no2_eq_co2_2020$Pais[which(is.na(co2_emissions_2020$Año_2020))] #Países que no registran datos de emisiones de CO2
+no2_eq_co2_2020$Pais[which(is.na(no2_eq_co2_2020$Año_2020))] #Países que no registran datos de emisiones de NO2
+no2_eq_co2_2020$Pais[which(is.na(ch4_eq_co2_2020$Año_2020))] #Países que no registran datos de emisiones de CH4
