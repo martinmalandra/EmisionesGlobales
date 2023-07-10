@@ -164,32 +164,41 @@ co2_2020 <- co2_df %>%
 ## Emisiones totales de C02 en kt
 
 co2_emissions_2020 <- co2_2020 %>% 
-  filter(Serie == "CO2 emissions (kt)")
+  filter(Serie == "CO2 emissions (kt)") %>% 
+  select(Pais, Año_2020)
 
-## C02 por producción de electricidad (devuelve todos NAs)
+## C02 por producción de electricidad (devuelve todos NAs, la borramos al final)
 
 co2_electricity_heat_2020 <- co2_2020 %>% 
-  filter(Serie == "CO2 emissions from electricity and heat production, total (% of total fuel combustion)")
+  filter(Serie == "CO2 emissions from electricity and heat production, total (% of total fuel combustion)") %>% 
+  select(Pais, Año_2020)
+rm(co2_electricity_heat_2020)
 
-## C02 consumo de combustible gaseoso (devuelve todos NAs)
+## C02 consumo de combustible gaseoso (devuelve todos NAs, la borramos al final)
 
 co2_gaseous_2020 <- co2_2020 %>% 
-  filter(Serie == "CO2 emissions from gaseous fuel consumption (% of total)")
+  filter(Serie == "CO2 emissions from gaseous fuel consumption (% of total)") %>% 
+  select(Pais, Año_2020)
+rm(co2_gaseous_2020)
 
-## C02 por consumo de combustible líquido (devuelve todos NAs)
+## C02 por consumo de combustible líquido (devuelve todos NAs, la borramos al final)
 
 co2_liquid_2020 <- co2_2020 %>% 
-  filter(Serie == "CO2 emissions from liquid fuel consumption (kt)")
+  filter(Serie == "CO2 emissions from liquid fuel consumption (kt)") %>% 
+  select(Pais, Año_2020)
+rm(co2_liquid_2020)
 
 ## Emisiones de metano (CH4) en equivalente de CO2
 
 ch4_eq_co2_2020 <- co2_2020 %>% 
-  filter(Serie == "Methane emissions (kt of CO2 equivalent)")
+  filter(Serie == "Methane emissions (kt of CO2 equivalent)") %>% 
+  select(Pais, Año_2020)
 
 ## Emisiones de óxido nitroso (NO2) en equivalente de CO2
 
 no2_eq_co2_2020 <- co2_2020 %>% 
-  filter(Serie == "Nitrous oxide emissions (thousand metric tons of CO2 equivalent)")
+  filter(Serie == "Nitrous oxide emissions (thousand metric tons of CO2 equivalent)") %>% 
+  select(Pais, Año_2020)
 
 
 ## Comprobación de NAs en los datasets creados
@@ -204,10 +213,10 @@ co2_nas <- no2_eq_co2_2020$Pais[which(is.na(co2_emissions_2020$Año_2020))] #Pa�
 no2_nas <- no2_eq_co2_2020$Pais[which(is.na(no2_eq_co2_2020$Año_2020))] #Países que no registran datos de emisiones de NO2
 ch4_nas <- no2_eq_co2_2020$Pais[which(is.na(ch4_eq_co2_2020$Año_2020))] #Países que no registran datos de emisiones de CH4
 
-## Identificamos si los paises que no reportan datos son los mismos en los tres casos
+## Hacemos una comprobación lógica para verificar si los paises que no reportan datos son los mismos en los tres casos
 
 if(all(co2_nas == no2_nas)){
-    "Los países que no registran datos de de emisiones CO2 son los mismos que no registran datos de emisiones de NO2"
+  "Los países que no registran datos de de emisiones CO2 son los mismos que no registran datos de emisiones de NO2"
 }
 
 if(all(co2_nas == ch4_nas)){
@@ -218,6 +227,17 @@ if(all(no2_nas == ch4_nas)){
   "Los países que no registran datos de de emisiones NO2 son los mismos que no registran datos de emisiones CH4"
 }
 
-## Ahora que estamos seguros, borramos los datos no registrados
+## Ahora que estamos seguros, borramos los datos NAs de los sets, creando DSs nuevos
 
+clean_co2_emissions_2020 <- co2_emissions_2020 %>% 
+  drop_na(Año_2020) %>%
+  rename(Kilotoneladas_CO2_2020=Año_2020)
+
+clean_no2_eq_co2_2020 <- no2_eq_co2_2020 %>% 
+  drop_na(Año_2020) %>%
+  rename(Kilotoneladas_NO2_2020=Año_2020)
+
+clean_ch4_eq_co2_2020 <- ch4_eq_co2_2020 %>% 
+  drop_na(Año_2020) %>% 
+  rename(Kilotoneladas_CH4_2020=Año_2020)
 
