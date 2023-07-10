@@ -200,6 +200,24 @@ which(is.na(co2_emissions_2020$Año_2020))
 
 ## Reescribimos para hallar los países que no registran los datos solicitados
 
-no2_eq_co2_2020$Pais[which(is.na(co2_emissions_2020$Año_2020))] #Países que no registran datos de emisiones de CO2
-no2_eq_co2_2020$Pais[which(is.na(no2_eq_co2_2020$Año_2020))] #Países que no registran datos de emisiones de NO2
-no2_eq_co2_2020$Pais[which(is.na(ch4_eq_co2_2020$Año_2020))] #Países que no registran datos de emisiones de CH4
+co2_nas <- no2_eq_co2_2020$Pais[which(is.na(co2_emissions_2020$Año_2020))] #Países que no registran datos de emisiones de CO2
+no2_nas <- no2_eq_co2_2020$Pais[which(is.na(no2_eq_co2_2020$Año_2020))] #Países que no registran datos de emisiones de NO2
+ch4_nas <- no2_eq_co2_2020$Pais[which(is.na(ch4_eq_co2_2020$Año_2020))] #Países que no registran datos de emisiones de CH4
+
+## Identificamos si los paises que no reportan datos son los mismos en los tres casos
+
+if(all(co2_nas == no2_nas)){
+    "Los países que no registran datos de de emisiones CO2 son los mismos que no registran datos de emisiones de NO2"
+}
+
+if(all(co2_nas == ch4_nas)){
+  "Los países que no registran datos de de emisiones CO2 son los mismos que no registran datos de emisiones de CH4"
+}
+
+if(all(no2_nas == ch4_nas)){
+  "Los países que no registran datos de de emisiones NO2 son los mismos que no registran datos de emisiones CH4"
+}
+
+## Ahora que estamos seguros, borramos los datos no registrados
+
+
