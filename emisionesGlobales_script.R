@@ -1,12 +1,10 @@
 # Instalación de paquetes
 
 install.packages("tidyverse")
-install.packages("naniar")
 
 # Carga de paquetes
 
 library(tidyverse)
-library(naniar)
 
 # Exploración inicial
 
@@ -156,3 +154,29 @@ co2_df <- co2_df %>%
          Año_2021=as.numeric(Año_2021),
          Año_2022=as.numeric(Año_2022))
 
+co2_2020 <- co2_df %>% 
+  select(Pais,
+         Serie,
+         Año_2020)
+
+# Seleccion de variables
+
+## C02 (kt)
+
+co2_emissions_2020 <- co2_2020 %>% 
+  filter(Serie == "CO2 emissions (kt)")
+
+## C02 por producción de electricidad (devuelve todos NAs)
+
+co2_electricity_heat_2020 <- co2_2020 %>% 
+  filter(Serie == "CO2 emissions from electricity and heat production, total (% of total fuel combustion)")
+
+## C02 consumo de combustible gaseoso (devuelve todos NAs)
+
+co2_gaseous_2020 <- co2_2020 %>% 
+  filter(Serie == "CO2 emissions from gaseous fuel consumption (% of total)")
+
+## C02 por consumo de combustible líquido (devuelve todos NAs)
+
+co2_liquid_2020 <- co2_2020 %>% 
+  filter(Serie == "CO2 emissions from liquid fuel consumption (kt)")
