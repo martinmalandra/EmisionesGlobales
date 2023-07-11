@@ -229,16 +229,36 @@ if(all(no2_nas == ch4_nas)){
 ## Ahora que estamos seguros, borramos los datos NAs de los sets.
 
 co2_emissions_2020 <- co2_emissions_2020 %>% 
-  drop_na(Año_2020)
+  drop_na(Año_2020) %>% 
+  filter(row_number()<=191)
 
 ch4_eq_co2_2020 <- ch4_eq_co2_2020 %>% 
-  drop_na(Año_2020)
+  drop_na(Año_2020) %>% 
+  filter(row_number()<=191)
 
 no2_eq_co2_2020 <- no2_eq_co2_2020 %>% 
-  drop_na(Año_2020)
+  drop_na(Año_2020) %>% 
+  filter(row_number()<=191)
+
+## Datasets por región
+
+co2_emissions_2020_regions <- co2_emissions_2020 %>% 
+  drop_na(Año_2020) %>% 
+  filter(row_number()>191)
+
+ch4_eq_co2_2020_regions <- ch4_eq_co2_2020 %>% 
+  drop_na(Año_2020) %>% 
+  filter(row_number()>191)
+
+no2_eq_co2_2020_regions <- no2_eq_co2_2020 %>% 
+  drop_na(Año_2020) %>% 
+  filter(row_number()>191)
 
 ## Exportamos a CSV
 
 write.csv(ch4_eq_co2_2020, "clean_CH4_2020.csv")
 write.csv(no2_eq_co2_2020, "clean_NO2_2020.csv")
 write.csv(co2_emissions_2020, "clean_CO2_2020.csv")
+write.csv(co2_emissions_2020_regions, "clean_CO2_regions_2020.csv")
+write.csv(ch4_eq_co2_2020_regions, "clean_CH4_regions_2020.csv")
+write.csv(no2_eq_co2_2020_regions, "clean_NO2_regions_2020.csv")
