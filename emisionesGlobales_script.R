@@ -170,30 +170,30 @@ co2_2020$Año_2020 <- round(co2_2020$Año_2020,2)
 
 ## Emisiones totales de C02 en kt
 
-co2_emissions_2020 <- co2_2020 %>% 
+co2_emisiones_2020 <- co2_2020 %>% 
   filter(Serie == "CO2 emissions (kt)") %>% 
   select(Pais, Año_2020)
 
 ## C02 por producción de electricidad (devuelve todos NAs, la borramos al final)
 
-co2_electricity_heat_2020 <- co2_2020 %>% 
+co2_elec_calor_2020 <- co2_2020 %>% 
   filter(Serie == "CO2 emissions from electricity and heat production, total (% of total fuel combustion)") %>% 
   select(Pais, Año_2020)
-rm(co2_electricity_heat_2020)
+rm(co2_elec_calor_2020)
 
 ## C02 consumo de combustible gaseoso (devuelve todos NAs, la borramos al final)
 
-co2_gaseous_2020 <- co2_2020 %>% 
+co2_gas_2020 <- co2_2020 %>% 
   filter(Serie == "CO2 emissions from gaseous fuel consumption (% of total)") %>% 
   select(Pais, Año_2020)
-rm(co2_gaseous_2020)
+rm(co2_gas_2020)
 
 ## C02 por consumo de combustible líquido (devuelve todos NAs, la borramos al final)
 
-co2_liquid_2020 <- co2_2020 %>% 
+co2_liq_2020 <- co2_2020 %>% 
   filter(Serie == "CO2 emissions from liquid fuel consumption (kt)") %>% 
   select(Pais, Año_2020)
-rm(co2_liquid_2020)
+rm(co2_liq_2020)
 
 ## Emisiones de metano (CH4) en equivalente de CO2
 
@@ -212,11 +212,11 @@ no2_2020 <- co2_2020 %>%
 
 which(is.na(no2_2020$Año_2020))
 which(is.na(ch4_2020$Año_2020))
-which(is.na(co2_emissions_2020$Año_2020))
+which(is.na(co2_emisiones_2020$Año_2020))
 
 ## Reescribimos para hallar los países que no registran los datos solicitados
 
-co2_nas <- co2_emissions_2020$Pais[which(is.na(co2_emissions_2020$Año_2020))] #Países que no registran datos de emisiones de CO2
+co2_nas <- co2_emisiones_2020$Pais[which(is.na(co2_emisiones_2020$Año_2020))] #Países que no registran datos de emisiones de CO2
 no2_nas <- no2_2020$Pais[which(is.na(no2_2020$Año_2020))] #Países que no registran datos de emisiones de NO2
 ch4_nas <- ch4_2020$Pais[which(is.na(ch4_2020$Año_2020))] #Países que no registran datos de emisiones de CH4
 
@@ -242,7 +242,7 @@ rm(co2_nas)
 rm(ch4_nas)
 
 ### Para las Emisiones de CO2
-co2_paises_2020 <- co2_emissions_2020 %>% 
+co2_paises_2020 <- co2_emisiones_2020 %>% 
   drop_na(Año_2020) %>% 
   filter(row_number()<=191)
 
@@ -262,7 +262,7 @@ no2_paises_2020 <- no2_2020 %>%
 ## Datasets por región
 
 ### Emisiones de CO2 por región
-regions_co2_2020 <- co2_emissions_2020 %>% 
+regions_co2_2020 <- co2_emisiones_2020 %>% 
   drop_na(Año_2020) %>% 
   filter(row_number()>191)
 
@@ -320,6 +320,12 @@ print(top_20_ch4)
 
 #--------------------------------------#
 
+# Gráficas
+
+## Pareto para el top 20 CO2
+
+
+#--------------------------------------#
 
 ## Exportamos a CSV
 
