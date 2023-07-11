@@ -16,6 +16,8 @@ col(read_csv("co2_data.csv"))
 
 print(read_csv("co2_data.csv"))
 
+options(scipen = 999) # remoción de la notación científica
+
 # Carga de variables y limpieza
 
 co2_df <- read.csv("co2_data.csv")
@@ -89,74 +91,80 @@ co2_df <- co2_df %>%
          Año_2020=X2020..YR2020.,
          Año_2021=X2021..YR2021.,
          Año_2022=X2022..YR2022.) %>% 
-  mutate(Año_1960=as.integer(Año_1960),
-         Año_1960=as.integer(Año_1960),
-         Año_1961=as.integer(Año_1961),
-         Año_1962=as.integer(Año_1962),
-         Año_1963=as.integer(Año_1963),
-         Año_1964=as.integer(Año_1964),
-         Año_1965=as.integer(Año_1965),
-         Año_1966=as.integer(Año_1966),
-         Año_1967=as.integer(Año_1967),
-         Año_1968=as.integer(Año_1968),
-         Año_1969=as.integer(Año_1969),
-         Año_1970=as.integer(Año_1970),
-         Año_1971=as.integer(Año_1971),
-         Año_1972=as.integer(Año_1972),
-         Año_1973=as.integer(Año_1973),
-         Año_1974=as.integer(Año_1974),
-         Año_1975=as.integer(Año_1975),
-         Año_1976=as.integer(Año_1976),
-         Año_1977=as.integer(Año_1977),
-         Año_1978=as.integer(Año_1978),
-         Año_1979=as.integer(Año_1979),
-         Año_1980=as.integer(Año_1980),
-         Año_1981=as.integer(Año_1981),
-         Año_1982=as.integer(Año_1982),
-         Año_1983=as.integer(Año_1983),
-         Año_1984=as.integer(Año_1984),
-         Año_1985=as.integer(Año_1985),
-         Año_1986=as.integer(Año_1986),
-         Año_1987=as.integer(Año_1987),
-         Año_1988=as.integer(Año_1988),
-         Año_1989=as.integer(Año_1989),
-         Año_1990=as.integer(Año_1990),
-         Año_1991=as.integer(Año_1991),
-         Año_1992=as.integer(Año_1992),
-         Año_1993=as.integer(Año_1993),
-         Año_1994=as.integer(Año_1994),
-         Año_1995=as.integer(Año_1995),
-         Año_1996=as.integer(Año_1996),
-         Año_1997=as.integer(Año_1997),
-         Año_1998=as.integer(Año_1998),
-         Año_1999=as.integer(Año_1999),
-         Año_2000=as.integer(Año_2000),
-         Año_2001=as.integer(Año_2001),
-         Año_2002=as.integer(Año_2002),
-         Año_2003=as.integer(Año_2003),
-         Año_2004=as.integer(Año_2004),
-         Año_2005=as.integer(Año_2005),
-         Año_2006=as.integer(Año_2006),
-         Año_2007=as.integer(Año_2007),
-         Año_2008=as.integer(Año_2008),
-         Año_2009=as.integer(Año_2009),
-         Año_2010=as.integer(Año_2010),
-         Año_2011=as.integer(Año_2011),
-         Año_2012=as.integer(Año_2012),
-         Año_2013=as.integer(Año_2013),
-         Año_2014=as.integer(Año_2014),
-         Año_2015=as.integer(Año_2015),
-         Año_2016=as.integer(Año_2016),
-         Año_2017=as.integer(Año_2017),
-         Año_2018=as.integer(Año_2018),
-         Año_2019=as.integer(Año_2019),
-         Año_2020=as.integer(Año_2020),
-         Año_2021=as.integer(Año_2021),
-         Año_2022=as.integer(Año_2022))
+  mutate(Año_1960=as.numeric(Año_1960),
+         Año_1960=as.numeric(Año_1960),
+         Año_1961=as.numeric(Año_1961),
+         Año_1962=as.numeric(Año_1962),
+         Año_1963=as.numeric(Año_1963),
+         Año_1964=as.numeric(Año_1964),
+         Año_1965=as.numeric(Año_1965),
+         Año_1966=as.numeric(Año_1966),
+         Año_1967=as.numeric(Año_1967),
+         Año_1968=as.numeric(Año_1968),
+         Año_1969=as.numeric(Año_1969),
+         Año_1970=as.numeric(Año_1970),
+         Año_1971=as.numeric(Año_1971),
+         Año_1972=as.numeric(Año_1972),
+         Año_1973=as.numeric(Año_1973),
+         Año_1974=as.numeric(Año_1974),
+         Año_1975=as.numeric(Año_1975),
+         Año_1976=as.numeric(Año_1976),
+         Año_1977=as.numeric(Año_1977),
+         Año_1978=as.numeric(Año_1978),
+         Año_1979=as.numeric(Año_1979),
+         Año_1980=as.numeric(Año_1980),
+         Año_1981=as.numeric(Año_1981),
+         Año_1982=as.numeric(Año_1982),
+         Año_1983=as.numeric(Año_1983),
+         Año_1984=as.numeric(Año_1984),
+         Año_1985=as.numeric(Año_1985),
+         Año_1986=as.numeric(Año_1986),
+         Año_1987=as.numeric(Año_1987),
+         Año_1988=as.numeric(Año_1988),
+         Año_1989=as.numeric(Año_1989),
+         Año_1990=as.numeric(Año_1990),
+         Año_1991=as.numeric(Año_1991),
+         Año_1992=as.numeric(Año_1992),
+         Año_1993=as.numeric(Año_1993),
+         Año_1994=as.numeric(Año_1994),
+         Año_1995=as.numeric(Año_1995),
+         Año_1996=as.numeric(Año_1996),
+         Año_1997=as.numeric(Año_1997),
+         Año_1998=as.numeric(Año_1998),
+         Año_1999=as.numeric(Año_1999),
+         Año_2000=as.numeric(Año_2000),
+         Año_2001=as.numeric(Año_2001),
+         Año_2002=as.numeric(Año_2002),
+         Año_2003=as.numeric(Año_2003),
+         Año_2004=as.numeric(Año_2004),
+         Año_2005=as.numeric(Año_2005),
+         Año_2006=as.numeric(Año_2006),
+         Año_2007=as.numeric(Año_2007),
+         Año_2008=as.numeric(Año_2008),
+         Año_2009=as.numeric(Año_2009),
+         Año_2010=as.numeric(Año_2010),
+         Año_2011=as.numeric(Año_2011),
+         Año_2012=as.numeric(Año_2012),
+         Año_2013=as.numeric(Año_2013),
+         Año_2014=as.numeric(Año_2014),
+         Año_2015=as.numeric(Año_2015),
+         Año_2016=as.numeric(Año_2016),
+         Año_2017=as.numeric(Año_2017),
+         Año_2018=as.numeric(Año_2018),
+         Año_2019=as.numeric(Año_2019),
+         Año_2020=as.numeric(Año_2020),
+         Año_2021=as.numeric(Año_2021),
+         Año_2022=as.numeric(Año_2022))
+
+# Datos del año 2020.
 co2_2020 <- co2_df %>% 
   select(Pais,
          Serie,
-         Año_2020) #datos del año 2020.
+         Año_2020)
+
+# Redondeo de decimales
+
+co2_2020$Año_2020 <- round(co2_2020$Año_2020,2)
 
 # Seleccion de variables
 
@@ -228,37 +236,51 @@ if(all(no2_nas == ch4_nas)){
 
 ## Ahora que estamos seguros, borramos los datos NAs de los sets.
 
-co2_emissions_2020 <- co2_emissions_2020 %>% 
+### Emisiones de CO2
+co2_emissions_countries_2020 <- co2_emissions_2020 %>% 
   drop_na(Año_2020) %>% 
   filter(row_number()<=191)
 
-ch4_eq_co2_2020 <- ch4_eq_co2_2020 %>% 
+### Emisiones de CH4
+ch4_eq_co2_countries_2020 <- ch4_eq_co2_2020 %>% 
   drop_na(Año_2020) %>% 
   filter(row_number()<=191)
 
-no2_eq_co2_2020 <- no2_eq_co2_2020 %>% 
+### Emisiones de NO2
+no2_eq_co2_countries_2020 <- no2_eq_co2_2020 %>% 
   drop_na(Año_2020) %>% 
   filter(row_number()<=191)
 
 ## Datasets por región
 
-co2_emissions_2020_regions <- co2_emissions_2020 %>% 
+### Emisiones de CO2 por región
+regions_co2_2020 <- co2_emissions_2020 %>% 
   drop_na(Año_2020) %>% 
   filter(row_number()>191)
 
-ch4_eq_co2_2020_regions <- ch4_eq_co2_2020 %>% 
+### Emisiones de CH4 por región
+regions_ch4_2020 <- ch4_eq_co2_2020 %>% 
   drop_na(Año_2020) %>% 
   filter(row_number()>191)
 
-no2_eq_co2_2020_regions <- no2_eq_co2_2020 %>% 
+### Emisiones de NO2 por región
+regions_no2_2020 <- no2_eq_co2_2020 %>% 
   drop_na(Año_2020) %>% 
   filter(row_number()>191)
+
+
+## Medidas descriptivas
+
+str(co2_emissions_countries_2020)
+mean(co2_emissions_countries_2020$Año_2020)
+quantile(co2_emissions_countries_2020$Año_2020)
+max(co2_emissions_countries_2020$Año_2020)
 
 ## Exportamos a CSV
 
 write.csv(ch4_eq_co2_2020, "clean_CH4_2020.csv")
 write.csv(no2_eq_co2_2020, "clean_NO2_2020.csv")
 write.csv(co2_emissions_2020, "clean_CO2_2020.csv")
-write.csv(co2_emissions_2020_regions, "clean_CO2_regions_2020.csv")
-write.csv(ch4_eq_co2_2020_regions, "clean_CH4_regions_2020.csv")
-write.csv(no2_eq_co2_2020_regions, "clean_NO2_regions_2020.csv")
+write.csv(regions_co2_2020, "clean_CO2_regions_2020.csv")
+write.csv(regions_ch4_2020, "clean_CH4_regions_2020.csv")
+write.csv(regions_no2_2020, "clean_NO2_regions_2020.csv")
