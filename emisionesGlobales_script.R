@@ -236,6 +236,11 @@ if(all(no2_nas == ch4_nas)){
 
 ## Ahora que estamos seguros, borramos los datos NAs de los sets.
 
+### Borrando las variables
+rm(no2_nas)
+rm(co2_nas)
+rm(ch4_nas)
+
 ### Para las Emisiones de CO2
 co2_paises_2020 <- co2_emissions_2020 %>% 
   drop_na(Año_2020) %>% 
@@ -276,49 +281,56 @@ regions_no2_2020 <- no2_2020 %>%
 
 ### Emisiones de CO2
 str(co2_paises_2020)
-mean(co2_paises_2020$Año_2020)
-quantile(co2_paises_2020$Año_2020)
-max(co2_paises_2020$Año_2020)
+mediaCO2 <- mean(co2_paises_2020$Año_2020)
+cuartilesCO2 <- quantile(co2_paises_2020$Año_2020)
+maximoCO2 <- max(co2_paises_2020$Año_2020)
 
 ### Emisiones de NO2
 str(no2_paises_2020)
-mean(no2_paises_2020$Año_2020)
-quantile(no2_paises_2020$Año_2020)
-max(no2_paises_2020$Año_2020)
+mediaNO2 <- mean(no2_paises_2020$Año_2020)
+cuartilesNO2 <- quantile(no2_paises_2020$Año_2020)
+maximoNO2 <- max(no2_paises_2020$Año_2020)
 
 ### Emisiones de CH4
 str(ch4_paises_2020)
-mean(ch4_paises_2020$Año_2020)
-quantile(ch4_paises_2020$Año_2020)
-max(ch4_paises_2020$Año_2020)
+mediaCH4 <- mean(ch4_paises_2020$Año_2020)
+cuartilesCH4 <- quantile(ch4_paises_2020$Año_2020)
+maximoCH4 <- max(ch4_paises_2020$Año_2020)
 
 ## Tablas
 
-### Top 10 países con mayores emisiones de CO2
-top_10_paises_co2 <- co2_paises_2020 %>% 
+### Top 20 países con mayores emisiones de CO2
+top_20_co2 <- co2_paises_2020 %>% 
   arrange(desc(Año_2020)) %>% 
-  head(10)
-print(top_10_paises_co2)
+  head(20)
+print(top_20_co2)
 
-### Top 10 países con mayores emisiones de NO2
-top_10_paises_no2 <- no2_paises_2020 %>% 
+### Top 20 países con mayores emisiones de NO2
+top_20_no2 <- no2_paises_2020 %>% 
   arrange(desc(Año_2020)) %>% 
-  head(10)
-print(top_10_paises_no2)
+  head(20)
+print(top_20_no2)
 
-### Top 10 países con mayores emisiones de CH4
-top_10_paises_ch4 <- ch4_paises_2020 %>% 
+### Top 20 países con mayores emisiones de CH4
+top_20_ch4 <- ch4_paises_2020 %>% 
   arrange(desc(Año_2020)) %>% 
-  head(10)
-print(top_10_paises_ch4)
+  head(20)
+print(top_20_ch4)
+
+
+#--------------------------------------#
 
 
 ## Exportamos a CSV
 
-write.csv(ch4_eq_co2_2020, "clean_CH4_2020.csv")
-write.csv(no2_eq_co2_2020, "clean_NO2_2020.csv")
+write.csv(ch4_paises_2020, "clean_CH4_2020.csv")
+write.csv(no2_paises_2020, "clean_NO2_2020.csv")
 write.csv(co2_paises_2020, "clean_CO2_2020.csv")
 
 write.csv(regions_co2_2020, "clean_CO2_regions_2020.csv")
 write.csv(regions_ch4_2020, "clean_CH4_regions_2020.csv")
 write.csv(regions_no2_2020, "clean_NO2_regions_2020.csv")
+
+write.csv(top_20_co2, "top_20_CO2.csv")
+write.csv(top_20_no2, "top_20_NO2.csv")
+write.csv(top_20_ch4, "top_20_CH4.csv")
