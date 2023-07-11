@@ -317,14 +317,6 @@ top_20_ch4 <- ch4_paises_2020 %>%
   head(20)
 print(top_20_ch4)
 
-
-#--------------------------------------#
-
-# Gráficas
-
-## Pareto para el top 20 CO2
-
-
 #--------------------------------------#
 
 ## Exportamos a CSV
