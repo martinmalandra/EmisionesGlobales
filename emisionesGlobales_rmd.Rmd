@@ -235,5 +235,194 @@ Otras categorías que exploramos son:
 
 Sin embargo, al hacer los dataframes veremos que en su totalidad los datos se encuentran incompletos. Esto puede comprobarse en el script disponible en el repositorio del proyecto.
 
-Sabiendo esto, entonces, continuamos nuestro análisis sobre los datos con los que contamos, los cuales resultan de gran utilidad.
+Sabiendo esto, entonces, continuamos nuestro proceso poniendo el foco en la información con la que sí contamos, la cual en su mayoría se encuentra completa, pero presenta algunas faltas en forma de NA (no disponibles.)
+
+Evaluamos la posibilidad de prescindir de estos "no disponibles" para nuestro análisis. Y lo hacemos comparando entre los tres nuevos data frames; buscando si los datos faltantes pertenecen a los mismos países.
+
+El siguiente código, nos devuelve los índices de los países con datos incompletos.
+
+```{r}
+which(is.na(no2_2020$Año_2020))
+which(is.na(ch4_2020$Año_2020))
+which(is.na(co2_emisiones_2020$Año_2020))
+```
+
+Para saber a qué país pertenece cada índice, alojamos los datos en variables y escribimos:
+
+```{r}
+co2_nas <- co2_emisiones_2020$Pais[which(is.na(co2_emisiones_2020$Año_2020))]
+no2_nas <- no2_2020$Pais[which(is.na(no2_2020$Año_2020))]
+ch4_nas <- ch4_2020$Pais[which(is.na(ch4_2020$Año_2020))]
+
+print(co2_nas)
+print(no2_nas)
+print(ch4_nas)
+```
+
+Y en este punto, hacemos tres pruebas lógicas para comprobar si efectivamente los datos faltantes se dan en los mismos países con:
+
+```{r}
+if(all(co2_nas == no2_nas)){
+  "Los países que no registran datos de de emisiones CO2 son los mismos que no registran datos de emisiones de NO2"
+}
+```
+
+```{r}
+if(all(co2_nas == ch4_nas)){
+  "Los países que no registran datos de de emisiones CO2 son los mismos que no registran datos de emisiones de CH4"
+}
+```
+
+```{r}
+if(all(no2_nas == ch4_nas)){
+  "Los países que no registran datos de de emisiones NO2 son los mismos que no registran datos de emisiones CH4"
+}
+```
+
+En los tres casos, se cumple la condición de igualdad.
+
+Sabiendo a ciencia cierta la estructura de los datos, y viendo que no altera la representatividad del análisis, decidimos eliminar los datos faltantes.
+
+Antes de eso, eliminamos las variables que utilizamos en la prueba lógica para limpiar nuestro entorno de trabajo.
+
+```{r}
+rm(no2_nas)
+rm(co2_nas)
+rm(ch4_nas)
+```
+
+Y ahora sí, comenzamos a limpiar.
+
+## Limpieza
+
+En otro vistazo a los datos, vemos que a partir de la fila 192 los datos se encuentran agrupados por regiones. Esto presenta otra oportunidad para separar, por un lado, países y por otro regiones. 
+
+Al eliminar los incompletos, también agregaremos una función de filtro para hacer la distinción entre países y regiones.
+
+A continuación, hacemos tres dataframes que representan las emisiones de CO2, CH4 y NO2 por cada país:
+
+```{r}
+co2_paises_2020 <- co2_emisiones_2020 %>% 
+  drop_na(Año_2020) %>% 
+  filter(row_number()<=191)
+print(co2_paises_2020)
+```
+
+```{r}
+ch4_paises_2020 <- ch4_2020 %>% 
+  drop_na(Año_2020) %>% 
+  filter(row_number()<=191)
+print(ch4_paises_2020)
+```
+
+```{r}
+no2_paises_2020 <- no2_2020 %>% 
+  drop_na(Año_2020) %>% 
+  filter(row_number()<=191)
+print(no2_paises_2020)
+```
+
+Y luego hacemos otros tres para las emisiones por cada región:
+
+```{r}
+regions_co2_2020 <- co2_emisiones_2020 %>% 
+  drop_na(Año_2020) %>% 
+  filter(row_number()>191)
+print(regions_co2_2020)
+```
+
+```{r}
+regions_ch4_2020 <- ch4_2020 %>% 
+  drop_na(Año_2020) %>% 
+  filter(row_number()>191)
+print(regions_co2_2020)
+```
+
+```{r}
+regions_no2_2020 <- no2_2020 %>% 
+  drop_na(Año_2020) %>% 
+  filter(row_number()>191)
+print(regions_co2_2020)
+```
+
+Con lo cual, ya contamos con los datos limpios y listos para efectuar análisis descriptivos y gráficas.
+
+# Análisis descriptivo
+
+## Medidas
+
+```{r}
+mediaCO2 <- mean(co2_paises_2020$Año_2020)
+cuartilesCO2 <- quantile(co2_paises_2020$Año_2020)
+maximoCO2 <- max(co2_paises_2020$Año_2020)
+```
+
+```{r}
+print(mediaCO2)
+print(cuartilesCO2)
+print(maximoCO2)
+```
+
+Estos datos nos indican que se trata de una distribución bastante asimétrica. Es decir, el máximo valor registrado arrastra el promedio de manera exagerada. Con lo cual utilizar la media aritmética se hace poco representativo. Dicho de otro modo, afirmar que "en promedio, cada país del mundo emite 169 mil kilotoneladas de CO2 por año" sería injusto, porque le estaríamos atribuyendo el problema a países que no corresponden y quitándole muchísima precisión al análisis.
+
+Por esto, se hace más adecuado utilizar medidas de posición como los cuartiles y la mediana. Estos nos permiten afirmar que:
+
+* Un 75% de los países del mundo emiten hasta alrededor de 61 mil kilotoneladas de CO2.
+
+* Hasta un 50% de los países del mundo emiten hasta alrededor de 11 mil kilotoneladas de CO2.
+
+* El mayor emisor de dióxido de carbono es China, que registra casi 11 millones de kilotoneladas.
+
+Fácilmente podemos observar que es una porción muy pequeña la que concentra la mayor cantidad de emisión de gases. Esto tiende a repetirse con los datos de NO2 y CH4.
+
+```{r}
+mediaCH4 <- mean(ch4_paises_2020$Año_2020)
+cuartilesCH4 <- quantile(ch4_paises_2020$Año_2020)
+maximoCH4 <- max(ch4_paises_2020$Año_2020)
+```
+
+```{r}
+str(mediaCH4)
+str(cuartilesCH4)
+str(maximoCH4)
+```
+
+```{r}
+mediaNO2 <- mean(no2_paises_2020$Año_2020)
+cuartilesNO2 <- quantile(no2_paises_2020$Año_2020)
+maximoNO2 <- max(no2_paises_2020$Año_2020)
+```
+
+```{r}
+print(mediaNO2)
+print(cuartilesNO2)
+print(maximoNO2)
+```
+
+## Tablas
+
+Ahora que sabemos que las emisiones de gases se encuentran distribuidas de manera asimétrica, nos podemos permitir realizar tablas que representen a los 20 países que registran mayores emisiones de CO2, N2O y CH4 respectivamente.
+
+A partir de los data frames creados anteriormente, hacemos:
+
+```{r}
+top_20_co2 <- co2_paises_2020 %>% 
+  arrange(desc(Año_2020)) %>% 
+  head(20)
+print(top_20_co2)
+```
+
+```{r}
+top_20_no2 <- no2_paises_2020 %>% 
+  arrange(desc(Año_2020)) %>% 
+  head(20)
+print(top_20_no2)
+```
+
+```{r}
+top_20_ch4 <- ch4_paises_2020 %>% 
+  arrange(desc(Año_2020)) %>% 
+  head(20)
+print(top_20_ch4)
+```
 

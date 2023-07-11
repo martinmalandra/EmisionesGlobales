@@ -20,7 +20,7 @@ options(scipen = 999) # remoción de la notación científica
 
 # Carga de variables y limpieza
 
-co2_df <- read.csv("co2_data.csv")
+  co2_df <- read.csv("co2_data.csv")
 
 # Renombrado de columnas y formateo a numéricas (agregando NAs)
 co2_df <- co2_df %>%
