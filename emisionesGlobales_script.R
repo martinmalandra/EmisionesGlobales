@@ -5,7 +5,6 @@ install.packages("tidyverse")
 # Carga de paquetes
 
 library(tidyverse)
-library(qcc)
 
 # Exploración inicial
 

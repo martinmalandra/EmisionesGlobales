@@ -3,3 +3,237 @@ title: ''
 output: html_document
 ---
 
+# Introducción
+
+El presente proyecto de análisis fue realizado en base a datos de emisiones de CO2 (dióxido de carbono), N20 (óxido nitroso) y CH4 (metano), bajo licencia del Banco Mundial y publicados en [Kaggle](https://www.kaggle.com/datasets/aniruddha1995/firethorn-10-world-co2-emission-analysis) por el usuario Aniruddha Kalblande.
+
+## Sobre el set de datos y el enfoque de análisis
+
+Los datos estudiados comprenden una colección detallada de indicadores medioambientales generados por varios países de todo el mundo, a lo largo de un extenso período histórico de más de 60 años. Gracias a este conjunto de datos, se pueden realizar diferentes análisis desde múltiples perspectivas. Para este análisis nos enfocaremos en los datos más actualizados que se registran en el conjunto, a fines de realizar un análisis descriptivo y gráfico que nos permita obtener conclusiones fundadas sobre la situación medioambiental del mundo y qué curso de acción se debería tomar.
+
+El código y los correspondientes archivos generados y documentación se encuentran disponibles en el [repositorio de Github]() de este proyecto para su descarga y vista en detalle.
+
+## Herramientas utilizadas
+
+El presente estudio utiliza RStudio para exploración, limpieza y exportación, y Google Sheets para presentación de gráficas y tablas.
+
+# Organización de datos y exploración
+
+Seteamos el archivo descargado y lo nombramos como "co2_data.csv". Configuramos el repositorio de GitHub y el directorio de trabajo en la misma ubicación. Una vez listo todo, desde RStudio, instalaremos y cargaremos la librería 'tidyverse'.
+
+```{r}
+library(tidyverse)
+```
+
+Luego, haremos una primera aproximación a los datos con algunas funciones básicas:
+
+```{r}
+as_tibble(read_csv("co2_data.csv"))
+str(read_csv("co2_data.csv"))
+col(read_csv("co2_data.csv"))
+print(read_csv("co2_data.csv"))
+```
+
+El set comprende una gran cantidad de campos. Muchos de ellos clasificados en subcategorías.
+
+Se observa también una gran presencia de datos incompletos, que, por ahora, no borraremos hasta tener un conocimiento más exacto de la estructura del set de datos.
+
+Notamos también la presencia de números de gran magnitud que, por lo general, RStudio suele formatear como números en notación científica. Para facilitar la lectura, preparamos el programa con:
+
+```{r}
+options(scipen = 999)
+```
+
+Comenzamos a trabajar alojando el set de datos inicial en una variable.
+
+```{r}
+co2_df <- read.csv("co2_data.csv")
+```
+
+Nuestro trabajo de orden y limpieza comienza cambiando los nombres de las columnas y formateando sus datos como números.
+
+```{r}
+co2_df <- co2_df %>%
+  rename(Pais=Country.Name,
+         Cod_Pais=Country.Code,
+         Serie=Series.Name,
+         Cod_Serie=Series.Code,
+         Año_1960=X1960..YR1960.,
+         Año_1961=X1961..YR1961.,
+         Año_1962=X1962..YR1962.,
+         Año_1963=X1963..YR1963.,
+         Año_1964=X1964..YR1964.,
+         Año_1965=X1965..YR1965.,
+         Año_1966=X1966..YR1966.,
+         Año_1967=X1967..YR1967.,
+         Año_1968=X1968..YR1968.,
+         Año_1969=X1969..YR1969.,
+         Año_1970=X1970..YR1970.,
+         Año_1971=X1971..YR1971.,
+         Año_1972=X1972..YR1972.,
+         Año_1973=X1973..YR1973.,
+         Año_1974=X1974..YR1974.,
+         Año_1975=X1975..YR1975.,
+         Año_1976=X1976..YR1976.,
+         Año_1977=X1977..YR1977.,
+         Año_1978=X1978..YR1978.,
+         Año_1979=X1979..YR1979.,
+         Año_1980=X1980..YR1980.,
+         Año_1981=X1981..YR1981.,
+         Año_1982=X1982..YR1982.,
+         Año_1983=X1983..YR1983.,
+         Año_1984=X1984..YR1984.,
+         Año_1985=X1985..YR1985.,
+         Año_1986=X1986..YR1986.,
+         Año_1987=X1987..YR1987.,
+         Año_1988=X1988..YR1988.,
+         Año_1989=X1989..YR1989.,
+         Año_1990=X1990..YR1990.,
+         Año_1991=X1991..YR1991.,
+         Año_1992=X1992..YR1992.,
+         Año_1993=X1993..YR1993.,
+         Año_1994=X1994..YR1994.,
+         Año_1995=X1995..YR1995.,
+         Año_1996=X1996..YR1996.,
+         Año_1997=X1997..YR1997.,
+         Año_1998=X1998..YR1998.,
+         Año_1999=X1999..YR1999.,
+         Año_2000=X2000..YR2000.,
+         Año_2001=X2001..YR2001.,
+         Año_2002=X2002..YR2002.,
+         Año_2003=X2003..YR2003.,
+         Año_2004=X2004..YR2004.,
+         Año_2005=X2005..YR2005.,
+         Año_2006=X2006..YR2006.,
+         Año_2007=X2007..YR2007.,
+         Año_2008=X2008..YR2008.,
+         Año_2009=X2009..YR2009.,
+         Año_2010=X2010..YR2010.,
+         Año_2011=X2011..YR2011.,
+         Año_2012=X2012..YR2012.,
+         Año_2013=X2013..YR2013.,
+         Año_2014=X2014..YR2014.,
+         Año_2015=X2015..YR2015.,
+         Año_2016=X2016..YR2016.,
+         Año_2017=X2017..YR2017.,
+         Año_2018=X2018..YR2018.,
+         Año_2019=X2019..YR2019.,
+         Año_2020=X2020..YR2020.,
+         Año_2021=X2021..YR2021.,
+         Año_2022=X2022..YR2022.) %>% 
+  mutate(Año_1960=as.numeric(Año_1960),
+         Año_1960=as.numeric(Año_1960),
+         Año_1961=as.numeric(Año_1961),
+         Año_1962=as.numeric(Año_1962),
+         Año_1963=as.numeric(Año_1963),
+         Año_1964=as.numeric(Año_1964),
+         Año_1965=as.numeric(Año_1965),
+         Año_1966=as.numeric(Año_1966),
+         Año_1967=as.numeric(Año_1967),
+         Año_1968=as.numeric(Año_1968),
+         Año_1969=as.numeric(Año_1969),
+         Año_1970=as.numeric(Año_1970),
+         Año_1971=as.numeric(Año_1971),
+         Año_1972=as.numeric(Año_1972),
+         Año_1973=as.numeric(Año_1973),
+         Año_1974=as.numeric(Año_1974),
+         Año_1975=as.numeric(Año_1975),
+         Año_1976=as.numeric(Año_1976),
+         Año_1977=as.numeric(Año_1977),
+         Año_1978=as.numeric(Año_1978),
+         Año_1979=as.numeric(Año_1979),
+         Año_1980=as.numeric(Año_1980),
+         Año_1981=as.numeric(Año_1981),
+         Año_1982=as.numeric(Año_1982),
+         Año_1983=as.numeric(Año_1983),
+         Año_1984=as.numeric(Año_1984),
+         Año_1985=as.numeric(Año_1985),
+         Año_1986=as.numeric(Año_1986),
+         Año_1987=as.numeric(Año_1987),
+         Año_1988=as.numeric(Año_1988),
+         Año_1989=as.numeric(Año_1989),
+         Año_1990=as.numeric(Año_1990),
+         Año_1991=as.numeric(Año_1991),
+         Año_1992=as.numeric(Año_1992),
+         Año_1993=as.numeric(Año_1993),
+         Año_1994=as.numeric(Año_1994),
+         Año_1995=as.numeric(Año_1995),
+         Año_1996=as.numeric(Año_1996),
+         Año_1997=as.numeric(Año_1997),
+         Año_1998=as.numeric(Año_1998),
+         Año_1999=as.numeric(Año_1999),
+         Año_2000=as.numeric(Año_2000),
+         Año_2001=as.numeric(Año_2001),
+         Año_2002=as.numeric(Año_2002),
+         Año_2003=as.numeric(Año_2003),
+         Año_2004=as.numeric(Año_2004),
+         Año_2005=as.numeric(Año_2005),
+         Año_2006=as.numeric(Año_2006),
+         Año_2007=as.numeric(Año_2007),
+         Año_2008=as.numeric(Año_2008),
+         Año_2009=as.numeric(Año_2009),
+         Año_2010=as.numeric(Año_2010),
+         Año_2011=as.numeric(Año_2011),
+         Año_2012=as.numeric(Año_2012),
+         Año_2013=as.numeric(Año_2013),
+         Año_2014=as.numeric(Año_2014),
+         Año_2015=as.numeric(Año_2015),
+         Año_2016=as.numeric(Año_2016),
+         Año_2017=as.numeric(Año_2017),
+         Año_2018=as.numeric(Año_2018),
+         Año_2019=as.numeric(Año_2019),
+         Año_2020=as.numeric(Año_2020),
+         Año_2021=as.numeric(Año_2021),
+         Año_2022=as.numeric(Año_2022))
+```
+
+```{r}
+as_tibble(co2_df)
+```
+
+Ahora contamos con un set de datos formateado con el cual, si quisiéramos, podríamos analizar de diferentes formas en función de la información que querramos obtener del mismo. Para este análisis, por ahora, nos interesa saber qué datos se encuentran completos para cada país en el año 2020 y con ello en mente continuamos explorando, prestando atención a algunas de las subcategorías que se presentan en la columna "Serie".
+
+Vemos que una buena opción para esto, son los datos categorizados como:
+
+* CO2 emissions (kt), es decir, las emisiones de dióxido de carbono en kilotoneladas
+* Methane emissions (kt of CO2 equivalent), que representa las emisiones de metano en kilotoneladas equivalentes de CO2
+* Nitrous oxide emissions (thousand metric tons of CO2 equivalent), que son las emisiones de óxido nitroso en toneladas de CO2 equivalentes.
+
+Creamos entonces data frames nuevos a partir del original, filtrando por categorías:
+
+```{r}
+co2_emisiones_2020 <- co2_2020 %>% 
+  filter(Serie == "CO2 emissions (kt)") %>% 
+  select(Pais, Año_2020)
+
+as_tibble(co2_emisiones_2020)
+```
+
+```{r}
+ch4_2020 <- co2_2020 %>% 
+  filter(Serie == "Methane emissions (kt of CO2 equivalent)") %>% 
+  select(Pais, Año_2020)
+
+as_tibble(ch4_2020)
+```
+
+```{r}
+no2_2020 <- co2_2020 %>% 
+  filter(Serie == "Nitrous oxide emissions (thousand metric tons of CO2 equivalent)") %>% 
+  select(Pais, Año_2020)
+
+as_tibble(no2_2020)
+```
+
+Para estos tres casos vemos que los data frames resultantes se ven bastante sólidos y completos en su generalidad, a excepción de algunos casos faltantes, que comprobaremos más adelante.
+
+Otras categorías que exploramos son:
+
+* CO2 emissions from electricity and heat production, total (% of total fuel combustion), es decir emisiones de dióxido de carbono provenientes de la generación de electricidad y de calor.
+* CO2 emissions from gaseous fuel consumption (% of total), que representa al porcentaje del total de emisiones de CO2 provenientes de consumo de combustible gaseoso.
+* CO2 emissions from liquid fuel consumption (kt), que serían las emisiones de CO2 provenientes del consumo de combustible líquido.
+
+Sin embargo, al hacer los dataframes veremos que en su totalidad los datos se encuentran incompletos. Esto puede comprobarse en el script disponible en el repositorio del proyecto.
+
+Sabiendo esto, entonces, continuamos nuestro análisis sobre los datos con los que contamos, los cuales resultan de gran utilidad.
+
