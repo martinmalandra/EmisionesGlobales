@@ -236,20 +236,23 @@ if(all(no2_nas == ch4_nas)){
 
 ## Ahora que estamos seguros, borramos los datos NAs de los sets.
 
-### Emisiones de CO2
+### Para las Emisiones de CO2
 co2_paises_2020 <- co2_emissions_2020 %>% 
   drop_na(Año_2020) %>% 
   filter(row_number()<=191)
 
-### Emisiones de CH4
+### Para las Emisiones de CH4
 ch4_paises_2020 <- ch4_2020 %>% 
   drop_na(Año_2020) %>% 
   filter(row_number()<=191)
 
-### Emisiones de NO2
+### Para las Emisiones de NO2
 no2_paises_2020 <- no2_2020 %>% 
   drop_na(Año_2020) %>% 
   filter(row_number()<=191)
+
+
+#--------------------------------------#
 
 ## Datasets por región
 
@@ -290,16 +293,19 @@ quantile(ch4_paises_2020$Año_2020)
 max(ch4_paises_2020$Año_2020)
 
 ## Tablas
+
 ### Top 10 países con mayores emisiones de CO2
 top_10_paises_co2 <- co2_paises_2020 %>% 
   arrange(desc(Año_2020)) %>% 
   head(10)
 print(top_10_paises_co2)
+
 ### Top 10 países con mayores emisiones de NO2
 top_10_paises_no2 <- no2_paises_2020 %>% 
   arrange(desc(Año_2020)) %>% 
   head(10)
 print(top_10_paises_no2)
+
 ### Top 10 países con mayores emisiones de CH4
 top_10_paises_ch4 <- ch4_paises_2020 %>% 
   arrange(desc(Año_2020)) %>% 
