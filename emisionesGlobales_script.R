@@ -16,7 +16,7 @@ col(read_csv("co2_data.csv"))
 
 print(read_csv("co2_data.csv"))
 
-# Carga de variables
+# Carga de variables y limpieza
 
 co2_df <- read.csv("co2_data.csv")
 
@@ -241,3 +241,9 @@ clean_ch4_eq_co2_2020 <- ch4_eq_co2_2020 %>%
   drop_na(Año_2020) %>% 
   rename(Kilotoneladas_CH4_2020=Año_2020)
 
+
+## Exportamos a CSV
+
+write.csv(clean_ch4_eq_co2_2020, "clean_CH4_2020.csv")
+write.csv(clean_no2_eq_co2_2020, "clean_NO2_2020.csv")
+write.csv(clean_CO2_2020, "clean_CO2_2020.csv")
