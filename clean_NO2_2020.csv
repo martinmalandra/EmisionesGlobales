@@ -1,0 +1,267 @@
+"","Pais","Año_2020"
+"1","Afghanistan",4863.39
+"2","Albania",1015.19
+"3","Algeria",12578.75
+"4","American Samoa",NA
+"5","Andorra",1.76
+"6","Angola",17757.87
+"7","Antigua and Barbuda",11.76
+"8","Argentina",51061.5
+"9","Armenia",1173.58
+"10","Aruba",NA
+"11","Australia",49331.82
+"12","Austria",3759.74
+"13","Azerbaijan",4793.55
+"14","Bahamas, The",33.82
+"15","Bahrain",171.64
+"16","Bangladesh",28076.85
+"17","Barbados",38.48
+"18","Belarus",15902.54
+"19","Belgium",4564.2
+"20","Belize",205.41
+"21","Benin",3007.64
+"22","Bermuda",NA
+"23","Bhutan",97.27
+"24","Bolivia",9838.14
+"25","Bosnia and Herzegovina",1283.7
+"26","Botswana",2963.63
+"27","Brazil",191103.25
+"28","British Virgin Islands",NA
+"29","Brunei Darussalam",137.9
+"30","Bulgaria",4328.73
+"31","Burkina Faso",10060.67
+"32","Burundi",1636.39
+"33","Cabo Verde",59.48
+"34","Cambodia",4784.59
+"35","Cameroon",62399.45
+"36","Canada",47080.31
+"37","Cayman Islands",NA
+"38","Central African Republic",10628.58
+"39","Chad",27724.59
+"40","Channel Islands",NA
+"41","Chile",6599.43
+"42","China",536920.21
+"43","Colombia",23778.21
+"44","Comoros",46.82
+"45","Congo, Dem. Rep.",14960.57
+"46","Congo, Rep.",1610.02
+"47","Costa Rica",1875.8
+"48","Cote d'Ivoire",3544.21
+"49","Croatia",1773.06
+"50","Cuba",3195.03
+"51","Curacao",NA
+"52","Cyprus",371.66
+"53","Czechia",4755.49
+"54","Denmark",5492.83
+"55","Djibouti",259.18
+"56","Dominica",20.53
+"57","Dominican Republic",3395.51
+"58","Ecuador",5192.81
+"59","Egypt, Arab Rep.",20471.53
+"60","El Salvador",1015.75
+"61","Equatorial Guinea",33.34
+"62","Eritrea",1730.46
+"63","Estonia",1827.19
+"64","Eswatini",423.54
+"65","Ethiopia",53761.3
+"66","Faroe Islands",NA
+"67","Fiji",191.23
+"68","Finland",5877.06
+"69","France",36202.72
+"70","French Polynesia",NA
+"71","Gabon",523.12
+"72","Gambia, The",359.18
+"73","Georgia",2158.3
+"74","Germany",33815.11
+"75","Ghana",6369.12
+"76","Gibraltar",NA
+"77","Greece",4423.25
+"78","Greenland",NA
+"79","Grenada",7.64
+"80","Guam",NA
+"81","Guatemala",5199.3
+"82","Guinea",6822.43
+"83","Guinea-Bissau",765.86
+"84","Guyana",567.14
+"85","Haiti",1533.39
+"86","Honduras",3123.89
+"87","Hong Kong SAR, China",NA
+"88","Hungary",6484.47
+"89","Iceland",368.66
+"90","India",279003.79
+"91","Indonesia",75595.64
+"92","Iran, Islamic Rep.",39719.81
+"93","Iraq",5439.69
+"94","Ireland",9572.9
+"95","Isle of Man",NA
+"96","Israel",2690.53
+"97","Italy",15989.66
+"98","Jamaica",409.69
+"99","Japan",18498.41
+"100","Jordan",1225.86
+"101","Kazakhstan",11597.46
+"102","Kenya",20969.05
+"103","Kiribati",5.12
+"104","Korea, Dem. People's Rep.",2590.05
+"105","Korea, Rep.",10096.79
+"106","Kosovo",NA
+"107","Kuwait",946.96
+"108","Kyrgyz Republic",2016.2
+"109","Lao PDR",3143.07
+"110","Latvia",2353.8
+"111","Lebanon",846.61
+"112","Lesotho",537.86
+"113","Liberia",295.3
+"114","Libya",1797.65
+"115","Liechtenstein",0.87
+"116","Lithuania",4614.14
+"117","Luxembourg",358.53
+"118","Macao SAR, China",NA
+"119","Madagascar",7665.37
+"120","Malawi",5054.86
+"121","Malaysia",9265.1
+"122","Maldives",9.22
+"123","Mali",15086.9
+"124","Malta",47.97
+"125","Marshall Islands",0.7
+"126","Mauritania",3273.34
+"127","Mauritius",221.87
+"128","Mexico",43291.23
+"129","Micronesia, Fed. Sts.",27.55
+"130","Moldova",993.18
+"131","Monaco",NA
+"132","Mongolia",14245.85
+"133","Montenegro",150.66
+"134","Morocco",8693.63
+"135","Mozambique",9599.74
+"136","Myanmar",22956.53
+"137","Namibia",3921.07
+"138","Nauru",0.4
+"139","Nepal",7177.76
+"140","Netherlands",8336.91
+"141","New Caledonia",NA
+"142","New Zealand",14909.88
+"143","Nicaragua",3567.37
+"144","Niger",13245.9
+"145","Nigeria",41196.3
+"146","North Macedonia",546.64
+"147","Northern Mariana Islands",NA
+"148","Norway",3522.99
+"149","Oman",1031.91
+"150","Pakistan",68971.75
+"151","Palau",0
+"152","Panama",1253.66
+"153","Papua New Guinea",1704.48
+"154","Paraguay",11255.78
+"155","Peru",10200.52
+"156","Philippines",14455.78
+"157","Poland",22864.4
+"158","Portugal",3092.14
+"159","Puerto Rico",NA
+"160","Qatar",602.92
+"161","Romania",9151.86
+"162","Russian Federation",69231.05
+"163","Rwanda",2006.21
+"164","Samoa",50.49
+"165","San Marino",NA
+"166","Sao Tome and Principe",17.43
+"167","Saudi Arabia",8249.2
+"168","Senegal",6023.26
+"169","Serbia",4373.7
+"170","Seychelles",4.04
+"171","Sierra Leone",1129.53
+"172","Singapore",10311.48
+"173","Sint Maarten (Dutch part)",NA
+"174","Slovak Republic",2031.69
+"175","Slovenia",807.89
+"176","Solomon Islands",23.28
+"177","Somalia",6548.95
+"178","South Africa",17992.99
+"179","South Sudan",21818.26
+"180","Spain",20960.37
+"181","Sri Lanka",3157.2
+"182","St. Kitts and Nevis",6.99
+"183","St. Lucia",27.38
+"184","St. Martin (French part)",NA
+"185","St. Vincent and the Grenadines",9.94
+"186","Sudan",29300.73
+"187","Suriname",178.09
+"188","Sweden",6381.07
+"189","Switzerland",2396.71
+"190","Syrian Arab Republic",3263.59
+"191","Tajikistan",2431.16
+"192","Tanzania",27293.19
+"193","Thailand",20931.78
+"194","Timor-Leste",273.82
+"195","Togo",1943.65
+"196","Tonga",52.27
+"197","Trinidad and Tobago",412.56
+"198","Tunisia",3298.03
+"199","Turkiye",38132.07
+"200","Turkmenistan",5327.15
+"201","Turks and Caicos Islands",NA
+"202","Tuvalu",1.44
+"203","Uganda",12404.19
+"204","Ukraine",28400.55
+"205","United Arab Emirates",1829.64
+"206","United Kingdom",27696.69
+"207","United States",258002.36
+"208","Uruguay",7967.68
+"209","Uzbekistan",16989.31
+"210","Vanuatu",86.28
+"211","Venezuela, RB",13097.22
+"212","Vietnam",26832.53
+"213","Virgin Islands (U.S.)",NA
+"214","West Bank and Gaza",NA
+"215","Yemen, Rep.",3364.86
+"216","Zambia",12363.49
+"217","Zimbabwe",4690.85
+"218","Africa Eastern and Southern",275690.74
+"219","Africa Western and Central",216101.87
+"220","Arab World",113241.49
+"221","Caribbean small states",1929.42
+"222","Central Europe and the Baltics",60992.74
+"223","Early-demographic dividend",919560.41
+"224","East Asia & Pacific",837424.48
+"225","East Asia & Pacific (excluding high income)",734137.81
+"226","East Asia & Pacific (IDA & IBRD countries)",731548.16
+"227","Euro area",159006.94
+"228","Europe & Central Asia",460694.58
+"229","Europe & Central Asia (excluding high income)",210844.75
+"230","Europe & Central Asia (IDA & IBRD countries)",244634.08
+"231","European Union",220238.85
+"232","Fragile and conflict affected situations",414407.1
+"233","Heavily indebted poor countries (HIPC)",382172.66
+"234","High income",690685.51
+"235","IBRD only",1725711.83
+"236","IDA & IBRD total",2356498.83
+"237","IDA blend",219121.22
+"238","IDA only",411665.78
+"239","IDA total",630787.01
+"240","Late-demographic dividend",1011124.05
+"241","Latin America & Caribbean",399474.89
+"242","Latin America & Caribbean (excluding high income)",369486.15
+"243","Latin America & the Caribbean (IDA & IBRD countries)",396207.57
+"244","Least developed countries: UN classification",401431.09
+"245","Low & middle income",2298573.7
+"246","Low income",261809.09
+"247","Lower middle income",848472.77
+"248","Middle East & North Africa",116529.97
+"249","Middle East & North Africa (excluding high income)",100959.2
+"250","Middle East & North Africa (IDA & IBRD countries)",100959.2
+"251","Middle income",2036764.61
+"252","North America",305082.67
+"253","Not classified",NA
+"254","OECD members",752837.48
+"255","Other small states",14195.33
+"256","Pacific island small states",438.77
+"257","Post-demographic dividend",662744.85
+"258","Pre-demographic dividend",408877
+"259","Small states",16563.52
+"260","South Asia",391357.22
+"261","South Asia (IDA & IBRD)",391357.22
+"262","Sub-Saharan Africa",491792.62
+"263","Sub-Saharan Africa (excluding high income)",491788.58
+"264","Sub-Saharan Africa (IDA & IBRD countries)",491792.62
+"265","Upper middle income",1188291.84
+"266","World",3017899.4
