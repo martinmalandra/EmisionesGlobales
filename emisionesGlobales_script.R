@@ -197,28 +197,28 @@ rm(co2_liquid_2020)
 
 ## Emisiones de metano (CH4) en equivalente de CO2
 
-ch4_eq_co2_2020 <- co2_2020 %>% 
+ch4_2020 <- co2_2020 %>% 
   filter(Serie == "Methane emissions (kt of CO2 equivalent)") %>% 
   select(Pais, Año_2020)
 
 ## Emisiones de óxido nitroso (NO2) en equivalente de CO2
 
-no2_eq_co2_2020 <- co2_2020 %>% 
+no2_2020 <- co2_2020 %>% 
   filter(Serie == "Nitrous oxide emissions (thousand metric tons of CO2 equivalent)") %>% 
   select(Pais, Año_2020)
 
 
 ## Comprobación de NAs en los datasets creados
 
-which(is.na(no2_eq_co2_2020$Año_2020))
-which(is.na(ch4_eq_co2_2020$Año_2020))
+which(is.na(no2_2020$Año_2020))
+which(is.na(ch4_2020$Año_2020))
 which(is.na(co2_emissions_2020$Año_2020))
 
 ## Reescribimos para hallar los países que no registran los datos solicitados
 
-co2_nas <- no2_eq_co2_2020$Pais[which(is.na(co2_emissions_2020$Año_2020))] #Países que no registran datos de emisiones de CO2
-no2_nas <- no2_eq_co2_2020$Pais[which(is.na(no2_eq_co2_2020$Año_2020))] #Países que no registran datos de emisiones de NO2
-ch4_nas <- no2_eq_co2_2020$Pais[which(is.na(ch4_eq_co2_2020$Año_2020))] #Países que no registran datos de emisiones de CH4
+co2_nas <- co2_emissions_2020$Pais[which(is.na(co2_emissions_2020$Año_2020))] #Países que no registran datos de emisiones de CO2
+no2_nas <- no2_2020$Pais[which(is.na(no2_2020$Año_2020))] #Países que no registran datos de emisiones de NO2
+ch4_nas <- ch4_2020$Pais[which(is.na(ch4_2020$Año_2020))] #Países que no registran datos de emisiones de CH4
 
 ## Hacemos una comprobación lógica para verificar si los paises que no reportan datos son los mismos en los tres casos
 
@@ -237,17 +237,17 @@ if(all(no2_nas == ch4_nas)){
 ## Ahora que estamos seguros, borramos los datos NAs de los sets.
 
 ### Emisiones de CO2
-co2_emissions_countries_2020 <- co2_emissions_2020 %>% 
+co2_paises_2020 <- co2_emissions_2020 %>% 
   drop_na(Año_2020) %>% 
   filter(row_number()<=191)
 
 ### Emisiones de CH4
-ch4_eq_co2_countries_2020 <- ch4_eq_co2_2020 %>% 
+ch4_paises_2020 <- ch4_2020 %>% 
   drop_na(Año_2020) %>% 
   filter(row_number()<=191)
 
 ### Emisiones de NO2
-no2_eq_co2_countries_2020 <- no2_eq_co2_2020 %>% 
+no2_paises_2020 <- no2_2020 %>% 
   drop_na(Año_2020) %>% 
   filter(row_number()<=191)
 
@@ -259,28 +259,60 @@ regions_co2_2020 <- co2_emissions_2020 %>%
   filter(row_number()>191)
 
 ### Emisiones de CH4 por región
-regions_ch4_2020 <- ch4_eq_co2_2020 %>% 
+regions_ch4_2020 <- ch4_2020 %>% 
   drop_na(Año_2020) %>% 
   filter(row_number()>191)
 
 ### Emisiones de NO2 por región
-regions_no2_2020 <- no2_eq_co2_2020 %>% 
+regions_no2_2020 <- no2_2020 %>% 
   drop_na(Año_2020) %>% 
   filter(row_number()>191)
 
 
 ## Medidas descriptivas
 
-str(co2_emissions_countries_2020)
-mean(co2_emissions_countries_2020$Año_2020)
-quantile(co2_emissions_countries_2020$Año_2020)
-max(co2_emissions_countries_2020$Año_2020)
+### Emisiones de CO2
+str(co2_paises_2020)
+mean(co2_paises_2020$Año_2020)
+quantile(co2_paises_2020$Año_2020)
+max(co2_paises_2020$Año_2020)
+
+### Emisiones de NO2
+str(no2_paises_2020)
+mean(no2_paises_2020$Año_2020)
+quantile(no2_paises_2020$Año_2020)
+max(no2_paises_2020$Año_2020)
+
+### Emisiones de CH4
+str(ch4_paises_2020)
+mean(ch4_paises_2020$Año_2020)
+quantile(ch4_paises_2020$Año_2020)
+max(ch4_paises_2020$Año_2020)
+
+## Tablas
+### Top 10 países con mayores emisiones de CO2
+top_10_paises_co2 <- co2_paises_2020 %>% 
+  arrange(desc(Año_2020)) %>% 
+  head(10)
+print(top_10_paises_co2)
+### Top 10 países con mayores emisiones de NO2
+top_10_paises_no2 <- no2_paises_2020 %>% 
+  arrange(desc(Año_2020)) %>% 
+  head(10)
+print(top_10_paises_no2)
+### Top 10 países con mayores emisiones de CH4
+top_10_paises_ch4 <- ch4_paises_2020 %>% 
+  arrange(desc(Año_2020)) %>% 
+  head(10)
+print(top_10_paises_ch4)
+
 
 ## Exportamos a CSV
 
 write.csv(ch4_eq_co2_2020, "clean_CH4_2020.csv")
 write.csv(no2_eq_co2_2020, "clean_NO2_2020.csv")
-write.csv(co2_emissions_2020, "clean_CO2_2020.csv")
+write.csv(co2_paises_2020, "clean_CO2_2020.csv")
+
 write.csv(regions_co2_2020, "clean_CO2_regions_2020.csv")
 write.csv(regions_ch4_2020, "clean_CH4_regions_2020.csv")
 write.csv(regions_no2_2020, "clean_NO2_regions_2020.csv")
