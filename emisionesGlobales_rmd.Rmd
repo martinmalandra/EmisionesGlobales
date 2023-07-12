@@ -9,17 +9,17 @@ El presente proyecto de análisis fue realizado en base a datos de emisiones de 
 
 ## Sobre el set de datos y el enfoque de análisis
 
-Los datos estudiados comprenden una colección detallada de indicadores medioambientales generados por varios países de todo el mundo, a lo largo de un extenso período histórico de más de 60 años. Gracias a este conjunto de datos, se pueden realizar diferentes análisis desde múltiples perspectivas. Para este análisis nos enfocaremos en los datos más actualizados que se registran en el conjunto, a fines de realizar un análisis descriptivo y gráfico que nos permita obtener conclusiones fundadas sobre la situación medioambiental del mundo y qué curso de acción se debería tomar.
+Los datos estudiados comprenden una colección detallada de indicadores medioambientales generados por varios países de todo el mundo, a lo largo de un extenso período histórico de más de 60 años. Gracias a este conjunto de datos, se pueden realizar diferentes análisis desde múltiples perspectivas. Para este en particular nos enfocaremos en los datos más actualizados que se registran, a fines de realizar un estudio descriptivo y gráfico que nos permita obtener conclusiones fundadas sobre la situación medioambiental del mundo y qué curso de acción se debería tomar.
 
 El código y los correspondientes archivos generados y documentación se encuentran disponibles en el [repositorio de Github]() de este proyecto para su descarga y vista en detalle.
 
 ## Herramientas utilizadas
 
-El presente estudio utiliza RStudio para exploración, limpieza y exportación, y Google Sheets para presentación de gráficas y tablas.
+RStudio para exploración, limpieza y exportación y Tableau para presentación de gráficas y tablas.
 
 # Organización de datos y exploración
 
-Seteamos el archivo descargado y lo nombramos como "co2_data.csv". Configuramos el repositorio de GitHub y el directorio de trabajo en la misma ubicación. Una vez listo todo, desde RStudio, instalaremos y cargaremos la librería 'tidyverse'.
+Seteamos el archivo descargado y lo nombramos como "co2_data.csv". Configuramos el repositorio de GitHub y el directorio de trabajo en la misma ubicación. Una vez listo, desde RStudio, instalaremos y cargaremos la librería 'tidyverse'.
 
 ```{r}
 library(tidyverse)
@@ -36,9 +36,9 @@ print(read_csv("co2_data.csv"))
 
 El set comprende una gran cantidad de campos. Muchos de ellos clasificados en subcategorías.
 
-Se observa también una gran presencia de datos incompletos, que, por ahora, no borraremos hasta tener un conocimiento más exacto de la estructura del set de datos.
+Se observa también una gran presencia de incompletos (...) que, por ahora, no borraremos hasta tener un conocimiento más exacto de la estructura del set de datos.
 
-Notamos también la presencia de números de gran magnitud que, por lo general, RStudio suele formatear como números en notación científica. Para facilitar la lectura, preparamos el programa con:
+Notamos también la presencia de números de gran magnitud que, por lo general, RStudio suele formatear como números en notación científica. Para que esto no suceda y la lectura sea fácil, preparamos el programa con:
 
 ```{r}
 options(scipen = 999)
@@ -50,7 +50,7 @@ Comenzamos a trabajar alojando el set de datos inicial en una variable.
 co2_df <- read.csv("co2_data.csv")
 ```
 
-Nuestro trabajo de orden y limpieza comienza cambiando los nombres de las columnas y formateando sus datos como números.
+Como punto de partida, cambiamos los nombres de las columnas y formateamos sus datos como números.
 
 ```{r}
 co2_df <- co2_df %>%
@@ -191,7 +191,9 @@ co2_df <- co2_df %>%
 as_tibble(co2_df)
 ```
 
-Ahora contamos con un set de datos formateado con el cual, si quisiéramos, podríamos analizar de diferentes formas en función de la información que querramos obtener del mismo. Para este análisis, por ahora, nos interesa saber qué datos se encuentran completos para cada país en el año 2020 y con ello en mente continuamos explorando, prestando atención a algunas de las subcategorías que se presentan en la columna "Serie".
+Ahora contamos con un set de datos formateado con el cual, si quisiéramos, podríamos analizar de diferentes formas en función de la información que querramos obtener del mismo. 
+
+Para este análisis, nos interesa saber qué datos se encuentran completos para cada país en el año 2020 (el último año que registra datos en el set) y con ello en mente continuamos explorando, prestando atención a algunas de las subcategorías que se presentan en la columna "Serie".
 
 Vemos que una buena opción para esto, son los datos categorizados como:
 
@@ -355,25 +357,27 @@ Con lo cual, ya contamos con los datos limpios y listos para efectuar análisis 
 mediaCO2 <- mean(co2_paises_2020$Año_2020)
 cuartilesCO2 <- quantile(co2_paises_2020$Año_2020)
 maximoCO2 <- max(co2_paises_2020$Año_2020)
+percentilesC02 <- quantile(co2_paises_2020$Año_2020, prob=seq(0, 1, length = 191))
 ```
 
 ```{r}
 print(mediaCO2)
 print(cuartilesCO2)
+print(percentilesC02)
 print(maximoCO2)
 ```
 
-Estos datos nos indican que se trata de una distribución bastante asimétrica. Es decir, el máximo valor registrado arrastra el promedio de manera exagerada. Con lo cual utilizar la media aritmética se hace poco representativo. Dicho de otro modo, afirmar que "en promedio, cada país del mundo emite 169 mil kilotoneladas de CO2 por año" sería injusto, porque le estaríamos atribuyendo el problema a países que no corresponden y quitándole muchísima precisión al análisis.
+Estos datos nos indican que se trata de una distribución bastante asimétrica. Es decir, el máximo presenta una variación muy grande en comparación con sus valores anteriores, lo que nos dice que utilizar la media aritmética se hace poco representativo, y por ende no adecuado, ya que afirmar que "en promedio, cada país del mundo emite 169 mil kilotoneladas de CO2 por año" sería como atribuirle el problema a países que no corresponden y quitándole muchísima precisión al análisis.
 
 Por esto, se hace más adecuado utilizar medidas de posición como los cuartiles y la mediana. Estos nos permiten afirmar que:
 
 * Un 75% de los países del mundo emiten hasta alrededor de 61 mil kilotoneladas de CO2.
 
-* Hasta un 50% de los países del mundo emiten hasta alrededor de 11 mil kilotoneladas de CO2.
+* Hasta un 50% de los países del mundo emiten alrededor de 11 mil kilotoneladas de CO2.
 
 * El mayor emisor de dióxido de carbono es China, que registra casi 11 millones de kilotoneladas.
 
-Fácilmente podemos observar que es una porción muy pequeña la que concentra la mayor cantidad de emisión de gases. Esto tiende a repetirse con los datos de NO2 y CH4.
+Como vemos, es una sección muy pequeña de la distribución la que concentra la mayor cantidad de emisiones. Esto tiende a repetirse con los datos de NO2 y CH4.
 
 ```{r}
 mediaCH4 <- mean(ch4_paises_2020$Año_2020)
@@ -426,3 +430,89 @@ top_20_ch4 <- ch4_paises_2020 %>%
 print(top_20_ch4)
 ```
 
+
+Contamos ahora con tablas simplificadas que podemos fácilmente exportar para seguir trabajando y generar las visualizaciones que nos interesan.
+
+## Exportación de archivos CSV
+
+Generamos entonces el código para exportar los dataframes creados a csv con:
+
+```{r}
+write.csv(ch4_paises_2020, "clean_CH4_2020.csv")
+write.csv(no2_paises_2020, "clean_NO2_2020.csv")
+write.csv(co2_paises_2020, "clean_CO2_2020.csv")
+```
+
+```{r}
+write.csv(top_20_co2, "top_20_CO2.csv")
+write.csv(top_20_no2, "top_20_NO2.csv")
+write.csv(top_20_ch4, "top_20_CH4.csv")
+```
+
+Estos archivos generados se encuentran disponibles en el repo de GitHub para su descarga.
+
+El resultado obtenido es un pequeño set de archivos livianos, mucho más fáciles de procesar y leer en una hoja de cálculo para generar visualizaciones o tablas. Lo que haremos ahora, entonces, es cargarlos en Google Sheets, consolidando el trabajo en un mismo archivo y haciendo que cada csv se ubique en una hoja diferente.
+
+Se puede acceder a la hoja de cálculo en el siguiente [link](https://docs.google.com/spreadsheets/d/13YySmKXi7j7vD6kEmLbEdxf14iC2qmAwxmmD_4LzYS4/edit?usp=sharing)
+
+# Visualizaciones
+
+Teniendo los datos cargados en una misma hoja de cálculo, podemos hacer las siguientes visualizaciones:
+
+- Mapas que ilustren las emisiones por color (Tableau)
+- Diagramas de pareto que muestren quienes concentran la mayor emision entre los 20 mayores emisores de gases invernadero. (Google Sheets)
+
+Para hacer ambas visualizaciones, utilizaremos el archivo XLSX (Excel) generado a partir de los csvs que construimos en RStudio.
+
+Luego generamos las fuentes de datos correspondientes y cargamos en Tableau generando las gráficas correspondientes.
+
+Todas las visualizaciones pueden verse en el siguiente [enlace](https://public.tableau.com/app/profile/mart.n.malandra/viz/EmisionesGlobalesdeGasesInvernadero2020/CO2)
+
+## Mapas de emisiones (2020)
+
+Generamos mapas para cada variable medida: CO2, N2O y CH4.
+
+![](CO2.png)
+
+![](CH4.png)
+
+![](N2O.png)
+## Diagramas de pareto
+
+El diagrama de Pareto es un tipo de visualización comúnmente utilizado en el sector industrial para el campo de control de calidad, siendo útil para identificar poco trivial y mucho vital.
+
+Con lo anterior en mente, y con las tablas que preparamos con los 20 países que registran mayores emisiones, generamos los siguientes diagramas
+
+![](pareto-co2.png)
+
+![](pareto-ch4.png)
+
+![](pareto-n2o.png)
+
+# Interpretación
+
+A partir de toda la información que obtuvimos y visualizamos podemos afirmar que:
+
+* Entre los 20 países de mayores emisiones, China y EE.UU son responsables de más de la mitad de la producción de CO2, registrando un 57% sobre un total de 20, y un 47% sobre el total global.
+
+* El 81,69% de la producción de CO2 del mundo se concentra en 20 países. Siendo China el principal productor, con Italia en el lugar 20.
+
+* El 80% del mundo registra emisiones de hasta 87578 kilotoneladas de CO2.
+
+# Conclusiones y caminos de acción
+
+Aunque para este informe no hicimos un enfrentamiento entre emisiones de gases y PBI, podemos inferir con facilidad que son los países de mayor desarrollo y actividad industrial los que mayores emisiones de CO2 registran. Por lo pronto, con todas las limitaciones de este análisis, todo indica que el impacto medioambiental es indivisible del modelo económico.
+
+Lo que nos dicen los datos es que la responsabilidad y el compromiso de revertir esta situación debe ser asumido por aquellas partes que más responsabilidad tienen en el severo problema medioambiental que enfrenta toda la humanidad
+
+Ante este dilema resulta injusto que se le exijan sacrificios a aquellas porciones del mundo que no estan contribuyendo con el problema pero padecen las consecuencias.
+
+Este análisis deja más preguntas que respuestas. Algunas son:
+
+* ¿Estarán los principales países del mundo dispuestos a asumir responsabilidades frente al problema de la contaminación ambiental?
+
+* ¿De ser necesario, estarán dispuestos los ciudadanos a ceder comodidades y despojarse del actual modelo de consumo?
+
+* ¿Están el sistema económico y social de la humanidad listos para asumir los cambios eventuales para revertir la situación?
+
+Dada la dimensión de la cuestión, no tenemos un alcance de acción directo, pero sí nos llevamos consciencia del dilema. Y con ello una gran responsabilidad para con el futuro.
