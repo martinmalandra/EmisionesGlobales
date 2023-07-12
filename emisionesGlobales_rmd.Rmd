@@ -204,7 +204,7 @@ Vemos que una buena opción para esto, son los datos categorizados como:
 Creamos entonces data frames nuevos a partir del original, filtrando por categorías:
 
 ```{r}
-co2_emisiones_2020 <- co2_2020 %>% 
+co2_emisiones_2020 <- co2_df %>% 
   filter(Serie == "CO2 emissions (kt)") %>% 
   select(Pais, Año_2020)
 
@@ -212,7 +212,7 @@ as_tibble(co2_emisiones_2020)
 ```
 
 ```{r}
-ch4_2020 <- co2_2020 %>% 
+ch4_2020 <- co2_df %>% 
   filter(Serie == "Methane emissions (kt of CO2 equivalent)") %>% 
   select(Pais, Año_2020)
 
@@ -220,7 +220,7 @@ as_tibble(ch4_2020)
 ```
 
 ```{r}
-no2_2020 <- co2_2020 %>% 
+no2_2020 <- co2_df %>% 
   filter(Serie == "Nitrous oxide emissions (thousand metric tons of CO2 equivalent)") %>% 
   select(Pais, Año_2020)
 
@@ -369,13 +369,7 @@ print(maximoCO2)
 
 Estos datos nos indican que se trata de una distribución bastante asimétrica. Es decir, el máximo presenta una variación muy grande en comparación con sus valores anteriores, lo que nos dice que utilizar la media aritmética se hace poco representativo, y por ende no adecuado, ya que afirmar que "en promedio, cada país del mundo emite 169 mil kilotoneladas de CO2 por año" sería como atribuirle el problema a países que no corresponden y quitándole muchísima precisión al análisis.
 
-Por esto, se hace más adecuado utilizar medidas de posición como los cuartiles y la mediana. Estos nos permiten afirmar que:
-
-* Un 75% de los países del mundo emiten hasta alrededor de 61 mil kilotoneladas de CO2.
-
-* Hasta un 50% de los países del mundo emiten alrededor de 11 mil kilotoneladas de CO2.
-
-* El mayor emisor de dióxido de carbono es China, que registra casi 11 millones de kilotoneladas.
+Por esto, se hace más adecuado utilizar medidas de posición como los cuartiles y la mediana.
 
 Como vemos, es una sección muy pequeña de la distribución la que concentra la mayor cantidad de emisiones. Esto tiende a repetirse con los datos de NO2 y CH4.
 

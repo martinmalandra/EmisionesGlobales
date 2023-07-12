@@ -2,7 +2,7 @@
 "1","Afghanistan",8709.47
 "2","Albania",4383.2
 "3","Algeria",161563
-"4","Andorra",448.88
+"4","Andorra",448.884399
 "5","Angola",19814.5
 "6","Antigua and Barbuda",474.6
 "7","Argentina",154535.9
@@ -21,12 +21,12 @@
 "20","Bhutan",1035.2
 "21","Bolivia",18375.3
 "22","Bosnia and Herzegovina",20946.8
-"23","Botswana",5763.69
+"23","Botswana",5763.687
 "24","Brazil",414138.8
 "25","Brunei Darussalam",9588
 "26","Bulgaria",34138.1
 "27","Burkina Faso",5456.7
-"28","Burundi",713.47
+"28","Burundi",713.466
 "29","Cabo Verde",620.6
 "30","Cambodia",18652.8
 "31","Cameroon",9928.4
@@ -98,7 +98,7 @@
 "97","Lesotho",2311.9
 "98","Liberia",1179.5
 "99","Libya",44467
-"100","Liechtenstein",142
+"100","Liechtenstein",141.996093
 "101","Lithuania",11693.8
 "102","Luxembourg",7853.1
 "103","Madagascar",2745.45
